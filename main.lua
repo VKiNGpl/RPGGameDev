@@ -5,25 +5,34 @@ LoadLibrary('System')
 
 gRenderer = Renderer:Create()
 
-gTileSprite = Sprite:Create()
-gGrassTexture = Texture.Find("grass_tile.png")
-gTileWidth = gGrassTexture:GetWidth()
-gTileHeight = gGrassTexture:GetHeight()
-
-gLeft = -System.ScreenWidth() / 2 + gTileWidth / 2
-gTop = System.ScreenHeight() / 2 - gTileHeight / 2
-
 gDisplayWidth = System.ScreenWidth()
 gDisplayHeight = System.ScreenHeight()
 
+gGrassSprite = Sprite:Create()
+gGrassTexture = Texture.Find("grass_center_1")
+
+gTileWidth = gGrassTexture:GetWidth()
+gTileHeight = gGrassTexture:GetHeight()
 gTilesPerRow = math.ceil(gDisplayWidth / gTileWidth)
 gTilesPerCollumn = math.ceil(gDisplayHeight / gTileHeight)
+gLeft = -System.ScreenWidth() / 2 + gTileWidth / 2
+gTop = System.ScreenHeight() / 2 - gTileHeight / 2
 
-gTileSprite:SetTexture(gGrassTexture)
+gGrassDirtTLSprite = Sprite:Create()
+gGrassDirtTLTexture = Texture.Find('grass_dirt_TL')
+gGrassDirtTOPSprite = Sprite:Create()
+gGrassDirtTOPTexture = Texture.Find('grass_dirt_TOP')
+
+gGrassSprite:SetTexture(gGrassTexture)
+gGrassDirtTLSprite:SetTexture(gGrassDirtTLTexture)
+gGrassDirtTOPSprite:SetTexture(gGrassDirtTOPTexture)
 
 function update()
-    for i = 0, gTilesPerRow - 1 do
-        gTileSprite:SetPosition(gLeft + i * gTileWidth, gTop)
-        gRenderer:DrawSprite(gTileSprite)
+    gGrassDirtTLSprite:SetPosition(gLeft, gTop)
+    gRenderer:DrawSprite(gGrassDirtTLSprite)
+
+    for i = 1, gTilesPerRow - 1 do
+        gGrassDirtTOPSprite:SetPosition(gLeft + i * gTileWidth, gTop)
+        gRenderer:DrawSprite(gGrassDirtTOPSprite)
     end
 end
