@@ -1,7 +1,7 @@
 
-name = "Hello World"
-width = 740
-height = 480
+name = "RPG Game"
+width = 800
+height = 510
 manifest = "manifest.lua"
 
 --
